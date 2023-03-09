@@ -39,7 +39,7 @@ private:
 class TrafficLight : public TrafficObject
 {
 public:
-    // constructor / desctructor
+    // constructor / destructor
     TrafficLight () = default;
     ~ TrafficLight() = default;
 
