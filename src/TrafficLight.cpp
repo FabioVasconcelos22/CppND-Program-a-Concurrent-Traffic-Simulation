@@ -35,12 +35,12 @@ void MessageQueue<T>::send(T &&msg)
 
 /* Implementation of class "TrafficLight" */
 
-/*
+
 TrafficLight::TrafficLight()
 {
-    _currentPhase = TrafficLightPhase::red;
+    _currentPhase = red;
 }
-*/
+
 void TrafficLight::waitForGreen()
 {
     // FP.5b : add the implementation of the method waitForGreen, in which an infinite while-loop 
@@ -54,12 +54,12 @@ void TrafficLight::waitForGreen()
         }
     }
 }
-/*
-TrafficLightPhase TrafficLight::getCurrentPhase()
+
+TrafficLight::TrafficLightPhase TrafficLight::getCurrentPhase()
 {
     return _currentPhase;
 }
-*/
+
 void TrafficLight::simulate()
 {
     // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread when the public method „simulate“ is called. To do this, use the thread queue in the base class.
@@ -82,17 +82,17 @@ void TrafficLight::cycleThroughPhases()
     int randomCycle = rand()%(maxTime-minTime + 1) + minTime;
 
     auto startTime = std::chrono::high_resolution_clock::now();
+
     while (true) {
-        if (_currentPhase == TrafficLightPhase::red) {
-            _currentPhase = TrafficLightPhase::green;
-        } else {
-            _currentPhase = TrafficLightPhase::red;
-        }
-
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
-        auto deltaTime = std::chrono::high_resolution_clock::now() - startTime;
 
-        if (deltaTime > std::chrono::seconds(randomCycle)) {
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        if (currentTime - startTime > std::chrono::seconds(randomCycle)) {
+            if (_currentPhase == TrafficLightPhase::red) {
+                _currentPhase = TrafficLightPhase::green;
+            } else {
+                _currentPhase = TrafficLightPhase::red;
+            }
             break;
         }
     }
