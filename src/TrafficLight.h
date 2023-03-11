@@ -43,7 +43,7 @@ public:
     TrafficLight ();
     ~ TrafficLight() = default;
 
-    enum TrafficLightPhase {
+    enum class TrafficLightPhase {
         red,
         green
     };
